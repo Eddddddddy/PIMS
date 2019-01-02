@@ -41,7 +41,9 @@ public class array_main {
                             }break;
                             case 5:{
                                 strArray = convertStrToArray(screen.add_in_stu());
-                                screen.screenAll(student.modify(Integer.parseInt(strArray[0]), strArray[1], Integer.parseInt(strArray[2]), Integer.parseInt(strArray[3])));
+                                if(student.delete(Integer.parseInt(strArray[0]))=="已删除"){
+                                    student.add(Integer.parseInt(strArray[0]), strArray[1], Integer.parseInt(strArray[2]), Integer.parseInt(strArray[3]));
+                                }
                             }break;
                             case 6:{j=1;}break;
                         }
