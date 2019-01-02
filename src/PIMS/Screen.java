@@ -1,6 +1,9 @@
 package PIMS;
 
+import java.util.Scanner;
+
 public class Screen {
+    Scanner scanner=new Scanner(System.in);
     void menu(){
         System.out.println("1.学生信息管理\r\n2.工人信息管理\r\n3.退出系统");
     }
@@ -15,5 +18,36 @@ public class Screen {
     }
     void succeed_add(){
         System.out.println("添加成功");
+    }
+    String add_in_stu(){
+        System.out.println("ID");
+        String ID=scanner.nextLine();
+        System.out.println("name");
+        String name=scanner.nextLine();
+        System.out.println("age");
+        String age=scanner.nextLine();
+        System.out.println("score");
+        String score=scanner.nextLine();
+        return ID+","+name+","+age+","+score;
+    }
+    String add_in_wor(){
+        System.out.println("ID");
+        String ID=scanner.nextLine();
+        System.out.println("name");
+        String name=scanner.nextLine();
+        System.out.println("age");
+        String age=scanner.nextLine();
+        System.out.println("salary");
+        String salary=scanner.nextLine();
+        System.out.println("work");
+        String work=scanner.nextLine();
+        return ID+","+name+","+age+","+salary+","+work;
+    }
+    void screenAll(String a){
+        System.out.println(a);
+    }
+    int search(){
+        System.out.println("请输入ID");
+        return scanner.nextInt();
     }
 }
