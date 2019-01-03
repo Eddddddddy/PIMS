@@ -1,4 +1,6 @@
-package PIMS;
+package Model;
+
+import View.Screen;
 
 import java.util.ArrayList;
 
@@ -20,7 +22,7 @@ public class Worker{
         }
     }
 
-    void add(int ID,String name,int age,int salary,String work){
+    public void add(int ID, String name, int age, int salary, String work){
         try {
             Wor temp=new Wor();
             temp.salary=salary;
@@ -35,7 +37,7 @@ public class Worker{
         }
     }
 
-    String printAll(){
+    public String printAll(){
         String temp="工人信息\r\n";
         Wor[] values = (Wor[])list_wor.toArray(new Wor[0]);
         for(int i=0;i<list_wor.size();i++){
@@ -44,7 +46,7 @@ public class Worker{
         return temp;
     }
 
-    String search(int a){
+    public String search(int a){
         Wor[] values = (Wor[])list_wor.toArray(new Wor[0]);
         for(int i=0;i<list_wor.size();i++){
                 if(values[i].ID==a){
@@ -54,7 +56,7 @@ public class Worker{
         return "无该工人";
     }
 
-    String delete(int a){
+    public String delete(int a){
         Wor[] values = (Wor[])list_wor.toArray(new Wor[0]);
         for(int i=0;i<list_wor.size();i++){
 

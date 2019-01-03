@@ -1,4 +1,4 @@
-package PIMS;
+package Model;
 
 public abstract class Person {
     int ID,age;

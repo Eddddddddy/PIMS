@@ -1,5 +1,9 @@
 package PIMS;
 
+import Model.Student;
+import Model.Worker;
+import View.Screen;
+
 import java.util.*;
 
 

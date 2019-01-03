@@ -1,4 +1,6 @@
-package PIMS;
+package Model;
+
+import View.Screen;
 
 import java.util.ArrayList;
 
@@ -18,7 +20,7 @@ public class Student{
         }
     }
 
-    void add(int ID,String name,int age,int score){
+    public void add(int ID, String name, int age, int score){
         try {
             Stu temp=new Stu();
             temp.score=score;
@@ -32,7 +34,7 @@ public class Student{
         }
     }
 
-    String printAll(){
+    public String printAll(){
         String temp="学生信息\r\n";
         Stu[] values = (Stu[])list_stu.toArray(new Stu[0]);
         for(int i=0;i<list_stu.size();i++){
@@ -41,7 +43,16 @@ public class Student{
         return temp;
     }
 
-    String search(int a){
+    public String showAll(){
+        String temp="学生信息\r\n";
+        Stu[] values = (Stu[])list_stu.toArray(new Stu[0]);
+        for(int i=0;i<list_stu.size();i++){
+            temp+=(values[i].ID+","+values[i].name+","+values[i].age+","+values[i].score+"\r\n");
+        }
+        return temp;
+    }
+
+    public String search(int a){
         Stu[] values = (Stu[])list_stu.toArray(new Stu[0]);
         for(int i=0;i<list_stu.size();i++){
                 if(values[i].ID==a){
@@ -51,7 +62,7 @@ public class Student{
         return "无该学生";
     }
 
-    String delete(int a){
+    public String delete(int a){
         Stu[] values = (Stu[])list_stu.toArray(new Stu[0]);
         for(int i=0;i<list_stu.size();i++){
 
