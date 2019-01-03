@@ -20,6 +20,7 @@ public class Screen {
         System.out.println("添加成功");
     }
     String add_in_stu(){
+        Scanner scanner=new Scanner(System.in);
         System.out.println("ID");
         String ID=scanner.nextLine();
         System.out.println("name");
@@ -31,6 +32,7 @@ public class Screen {
         return ID+","+name+","+age+","+score;
     }
     String add_in_wor(){
+        Scanner scanner=new Scanner(System.in);
         System.out.println("ID");
         String ID=scanner.nextLine();
         System.out.println("name");

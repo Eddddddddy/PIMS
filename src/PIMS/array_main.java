@@ -70,7 +70,9 @@ public class array_main {
                             }break;
                             case 5:{
                                 strArray = convertStrToArray(screen.add_in_wor());
-                                screen.screenAll(worker.modify(Integer.parseInt(strArray[0]), strArray[1], Integer.parseInt(strArray[2]), Integer.parseInt(strArray[3]),strArray[4]));
+                                if(worker.delete(Integer.parseInt(strArray[0]))=="已删除"){
+                                    worker.add(Integer.parseInt(strArray[0]), strArray[1], Integer.parseInt(strArray[2]), Integer.parseInt(strArray[3]),strArray[4]);
+                                }
                             }break;
                             case 6:{j=1;}break;
                         }
