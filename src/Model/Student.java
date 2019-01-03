@@ -14,7 +14,7 @@ public class Student{
     public class Stu extends Person{
         int score;
         void Stu(){}
-        void Stu(int ID,String name,int age,int score){
+        public void Stu(int ID,String name,int age,int score){
             super.Person(ID,name,age);
             this.score=score;
         }
@@ -73,5 +73,13 @@ public class Student{
 
         }
         return "无该学生";
+    }
+
+    public void deleteAll(){
+        list_stu.clear();
+    }
+
+    public void readList(ArrayList temp){
+        list_stu=temp;
     }
 }

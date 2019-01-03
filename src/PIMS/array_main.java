@@ -1,5 +1,6 @@
 package PIMS;
 
+import Model.File_fun;
 import Model.Student;
 import Model.Worker;
 import View.Screen;
@@ -18,12 +19,20 @@ public class array_main {
         Student student=new Student();
         Worker worker=new Worker();
         Screen screen=new Screen();
+        File_fun file=new File_fun();
         Scanner scanner = new Scanner(System.in);
         int s,k=0;
         while (k==0) {
             screen.menu();
             s=scanner.nextInt();
             switch (s) {
+                case 0:{
+                    student.deleteAll();
+                    student.readList(file.read_file());
+                }break;
+                case 9:{
+                    file.write_file(student,worker);
+                }break;
                 case 1: {
                     int j=0;
                     while (j==0) {
