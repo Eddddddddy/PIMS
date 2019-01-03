@@ -10,8 +10,6 @@ import java.util.*;
 
 
 public class array_main {
-
-
     public static void main(String[] args){
         String[] strArray;
         Student student=new Student();

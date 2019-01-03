@@ -1,23 +1,12 @@
 package Model;
 
-import View.Screen;
-
 import java.util.ArrayList;
 
 public class Student{
-    int i=0;
-    //Stu student[]=new Stu[10];
-    Screen screen = new Screen();
-
     ArrayList list_stu=new ArrayList();
 
     public class Stu extends Person{
         int score;
-        void Stu(){}
-        public void Stu(int ID,String name,int age,int score){
-            super.Person(ID,name,age);
-            this.score=score;
-        }
     }
 
     public String add(int ID, String name, int age, int score){

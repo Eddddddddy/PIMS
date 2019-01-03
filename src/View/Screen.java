@@ -3,7 +3,7 @@ package View;
 import java.util.Scanner;
 
 public class Screen {
-    Scanner scanner=new Scanner(System.in);
+    private Scanner scanner=new Scanner(System.in);
     public void menu(){
         System.out.println("1.学生信息管理\r\n2.工人信息管理\r\n3.退出系统");
     }

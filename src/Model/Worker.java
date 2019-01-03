@@ -1,25 +1,13 @@
 package Model;
 
-import View.Screen;
-
 import java.util.ArrayList;
 
 public class Worker{
-    int i=0;
-    //Wor worker[]=new Wor[10];
-    Screen screen = new Screen();
-
     ArrayList list_wor=new ArrayList();
 
     public class Wor extends Person{
         int salary;
         String work;
-        void Wor(){}
-        void Wor(int ID,String name,int age,int salary,String work){
-            super.Person(ID,name,age);
-            this.salary=salary;
-            this.work=work;
-        }
     }
 
     public String add(int ID, String name, int age, int salary, String work){
