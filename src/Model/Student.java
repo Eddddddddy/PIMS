@@ -20,7 +20,7 @@ public class Student{
         }
     }
 
-    public void add(int ID, String name, int age, int score){
+    public String add(int ID, String name, int age, int score){
         try {
             Stu temp=new Stu();
             temp.score=score;
@@ -28,9 +28,9 @@ public class Student{
             temp.ID=ID;
             temp.name=name;
             list_stu.add(temp);
-            screen.succeed_add();
+            return "添加成功";
         }catch(Exception e){
-            screen.full();
+            return "添加失败";
         }
     }
 

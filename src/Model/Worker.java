@@ -22,7 +22,7 @@ public class Worker{
         }
     }
 
-    public void add(int ID, String name, int age, int salary, String work){
+    public String add(int ID, String name, int age, int salary, String work){
         try {
             Wor temp=new Wor();
             temp.salary=salary;
@@ -31,9 +31,9 @@ public class Worker{
             temp.name=name;
             temp.work=work;
             list_wor.add(temp);
-            screen.succeed_add();
+            return "添加成功";
         }catch(Exception e){
-            screen.full();
+            return "添加失败";
         }
     }
 
@@ -41,7 +41,16 @@ public class Worker{
         String temp="工人信息\r\n";
         Wor[] values = (Wor[])list_wor.toArray(new Wor[0]);
         for(int i=0;i<list_wor.size();i++){
-                temp+=("ID:"+values[i].ID+"name:"+values[i].name+"age:"+values[i].age+"score:"+values[i].salary+"work:"+values[i].work+"\r\n");
+                temp+=("ID:"+values[i].ID+"name:"+values[i].name+"age:"+values[i].age+"salary:"+values[i].salary+"work:"+values[i].work+"\r\n");
+        }
+        return temp;
+    }
+
+    public String showAll(){
+        String temp="工人信息\r\n";
+        Wor[] values = (Wor[])list_wor.toArray(new Wor[0]);
+        for(int i=0;i<list_wor.size();i++){
+            temp+=(values[i].ID+","+values[i].name+","+values[i].age+","+values[i].salary+","+values[i].work+"\r\n");
         }
         return temp;
     }
@@ -67,5 +76,13 @@ public class Worker{
 
         }
         return "无该工人";
+    }
+
+    public void deleteAll(){
+        list_wor.clear();
+    }
+
+    public void readList(ArrayList temp){
+        list_wor=temp;
     }
 }

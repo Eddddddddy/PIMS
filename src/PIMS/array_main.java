@@ -12,23 +12,27 @@ import java.util.*;
 public class array_main {
 
 
-    public static void main(String args[]){
-        int ID,score,salary,age;
-        String name,work;
-        String[] strArray=null;
+    public static void main(String[] args){
+        String[] strArray;
         Student student=new Student();
         Worker worker=new Worker();
         Screen screen=new Screen();
         File_fun file=new File_fun();
         Scanner scanner = new Scanner(System.in);
         int s,k=0;
+        student.deleteAll();
+        student.readList(file.read_file_stu());
+        worker.deleteAll();
+        worker.readList(file.read_file_wor());
         while (k==0) {
             screen.menu();
             s=scanner.nextInt();
             switch (s) {
                 case 0:{
                     student.deleteAll();
-                    student.readList(file.read_file());
+                    student.readList(file.read_file_stu());
+                    worker.deleteAll();
+                    worker.readList(file.read_file_wor());
                 }break;
                 case 9:{
                     file.write_file(student,worker);
@@ -41,7 +45,8 @@ public class array_main {
                         switch (s) {
                             case 1: {
                                 strArray = convertStrToArray(screen.add_in_stu());
-                                student.add(Integer.parseInt(strArray[0]), strArray[1], Integer.parseInt(strArray[2]), Integer.parseInt(strArray[3]));
+                                screen.screenAll(student.add(Integer.parseInt(strArray[0]), strArray[1], Integer.parseInt(strArray[2]), Integer.parseInt(strArray[3])));
+                                file.write_file(student,worker);
                             }break;
                             case 2: {
                                 screen.screenAll(student.printAll());
@@ -51,12 +56,14 @@ public class array_main {
                             }break;
                             case 4:{
                                 screen.screenAll(student.delete(screen.search()));
+                                file.write_file(student,worker);
                             }break;
                             case 5:{
                                 strArray = convertStrToArray(screen.add_in_stu());
-                                if(student.delete(Integer.parseInt(strArray[0]))=="已删除"){
+                                if(student.delete(Integer.parseInt(strArray[0])).equals("已删除")){
                                     student.add(Integer.parseInt(strArray[0]), strArray[1], Integer.parseInt(strArray[2]), Integer.parseInt(strArray[3]));
                                 }
+                                file.write_file(student,worker);
                             }break;
                             case 6:{j=1;}break;
                         }
@@ -70,7 +77,8 @@ public class array_main {
                         switch (s) {
                             case 1: {
                                 strArray = convertStrToArray(screen.add_in_wor());
-                                worker.add(Integer.parseInt(strArray[0]), strArray[1], Integer.parseInt(strArray[2]), Integer.parseInt(strArray[3]),strArray[4]);
+                                screen.screenAll(worker.add(Integer.parseInt(strArray[0]), strArray[1], Integer.parseInt(strArray[2]), Integer.parseInt(strArray[3]),strArray[4]));
+                                file.write_file(student,worker);
                             }break;
                             case 2: {
                                 screen.screenAll(worker.printAll());
@@ -80,12 +88,14 @@ public class array_main {
                             }break;
                             case 4:{
                                 screen.screenAll(worker.delete(screen.search()));
+                                file.write_file(student,worker);
                             }break;
                             case 5:{
                                 strArray = convertStrToArray(screen.add_in_wor());
-                                if(worker.delete(Integer.parseInt(strArray[0]))=="已删除"){
+                                if(worker.delete(Integer.parseInt(strArray[0])).equals("已删除")){
                                     worker.add(Integer.parseInt(strArray[0]), strArray[1], Integer.parseInt(strArray[2]), Integer.parseInt(strArray[3]),strArray[4]);
                                 }
+                                file.write_file(student,worker);
                             }break;
                             case 6:{j=1;}break;
                         }
@@ -100,8 +110,8 @@ public class array_main {
 
     }
 
-    public static String[] convertStrToArray(String str){
-        String[] strArray = null;
+    private static String[] convertStrToArray(String str){
+        String[] strArray;
         strArray = str.split(",");
         return strArray;
     }

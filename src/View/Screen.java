@@ -13,12 +13,6 @@ public class Screen {
     public void worker(){
         System.out.println("1.增加工人信息\r\n2.列出全部工人信息\r\n3.查询工人信息\n4.删除工人信息\n5.修改工人信息\n6.返回上一级菜单");
     }
-    public void full(){
-        System.out.println("满了");
-    }
-    public void succeed_add(){
-        System.out.println("添加成功");
-    }
     public String add_in_stu(){
         Scanner scanner=new Scanner(System.in);
         System.out.println("ID");
