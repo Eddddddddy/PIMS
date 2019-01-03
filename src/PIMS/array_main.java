@@ -3,6 +3,7 @@ package PIMS;
 import Model.File_fun;
 import Model.Student;
 import Model.Worker;
+import View.Gui;
 import View.Screen;
 
 import java.util.*;
@@ -11,12 +12,18 @@ import java.util.*;
 
 public class array_main {
     public static void main(String[] args){
+
+        Gui gui=new Gui();
+
         String[] strArray;
         Student student=new Student();
         Worker worker=new Worker();
         Screen screen=new Screen();
         File_fun file=new File_fun();
         Scanner scanner = new Scanner(System.in);
+
+        Control control=new Control(gui,student,worker,file);
+
         int s,k=0;
         student.deleteAll();
         student.readList(file.read_file_stu());
@@ -26,15 +33,6 @@ public class array_main {
             screen.menu();
             s=scanner.nextInt();
             switch (s) {
-                case 0:{
-                    student.deleteAll();
-                    student.readList(file.read_file_stu());
-                    worker.deleteAll();
-                    worker.readList(file.read_file_wor());
-                }break;
-                case 9:{
-                    file.write_file(student,worker);
-                }break;
                 case 1: {
                     int j=0;
                     while (j==0) {
@@ -42,9 +40,7 @@ public class array_main {
                         s = scanner.nextInt();
                         switch (s) {
                             case 1: {
-                                strArray = convertStrToArray(screen.add_in_stu());
-                                screen.screenAll(student.add(Integer.parseInt(strArray[0]), strArray[1], Integer.parseInt(strArray[2]), Integer.parseInt(strArray[3])));
-                                file.write_file(student,worker);
+                                add_stu(student, worker, screen, file);
                             }break;
                             case 2: {
                                 screen.screenAll(student.printAll());
@@ -106,6 +102,13 @@ public class array_main {
 
 
 
+    }
+
+    public static void add_stu(Student student, Worker worker, Screen screen, File_fun file) {
+        String[] strArray;
+        strArray = convertStrToArray(screen.add_in_stu());
+        screen.screenAll(student.add(Integer.parseInt(strArray[0]), strArray[1], Integer.parseInt(strArray[2]), Integer.parseInt(strArray[3])));
+        file.write_file(student,worker);
     }
 
     private static String[] convertStrToArray(String str){

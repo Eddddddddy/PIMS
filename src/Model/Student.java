@@ -45,7 +45,7 @@ public class Student{
         Stu[] values = (Stu[])list_stu.toArray(new Stu[0]);
         for(int i=0;i<list_stu.size();i++){
                 if(values[i].ID==a){
-                    return ("ID:"+values[i].ID+"name:"+values[i].name+"age:"+values[i].age+"score:"+values[i].score);
+                    return (values[i].ID+","+values[i].name+","+values[i].age+","+values[i].score);
                 }
         }
         return "无该学生";
