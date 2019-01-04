@@ -1,18 +1,14 @@
 package View;
 
-import PIMS.Control;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Gui {
-    CardLayout cardLayout = new CardLayout();
+    public CardLayout cardLayout = new CardLayout();
 
     JFrame f = new JFrame("学生管理系统");
 
-    JPanel p_card = new JPanel(cardLayout);
+    public JPanel p_card = new JPanel(cardLayout);
     JPanel p_card_s = new JPanel();
     JPanel p_card_w = new JPanel();
     JPanel p_Search_s = new JPanel();
@@ -64,9 +60,15 @@ public class Gui {
         //p_card_s.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         show_t.setBounds(0, 0, 787, 300);
-        p_card.setBounds(0, 300, 800, 200);
-        p_switch.setBounds(0, 500, 800, 50);
-        p_L.setBounds(0, 550, 800, 50);
+        p_Button_s.setSize(100,100);
+        p_card_s.setSize(400,200);
+        p_card_s.setLayout(new GridLayout(3,3));
+        p_Button_w.setSize(100,100);
+        p_card_w.setSize(400,200);
+        p_card_w.setLayout(new GridLayout(3,3));
+        p_card.setBounds(0, 300, 800, 150);
+        p_switch.setBounds(0, 450, 800, 50);
+        p_L.setBounds(0, 500, 800, 50);
         p_L.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         p_Button_s.add(button_Add_s);
@@ -95,10 +97,10 @@ public class Gui {
         p_Operation_w.add(new JLabel("    工种："));
         p_Operation_w.add(t_work);
 
-        p_Search_s.add(new JLabel("学号："));
+        p_Search_s.add(new JLabel("ID："));
         p_Search_s.add(s_ID_s);
         p_Search_s.add(button_Search_s);
-        p_Search_w.add(new JLabel("学号："));
+        p_Search_w.add(new JLabel("ID："));
         p_Search_w.add(s_ID_w);
         p_Search_w.add(button_Search_w);
 
@@ -124,31 +126,7 @@ public class Gui {
         f.setVisible(true);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Switch();
 
-    }
-
-    public void Switch(){
-        button_Stu.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(p_card,"s");
-            }
-        });
-        button_Wor.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(p_card,"w");
-            }
-        });
-    }
-
-    public void Add(){
-        button_Add_s.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
     }
 
 }

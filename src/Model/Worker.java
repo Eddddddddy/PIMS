@@ -29,7 +29,7 @@ public class Worker{
         String temp="工人信息\r\n";
         Wor[] values = (Wor[])list_wor.toArray(new Wor[0]);
         for(int i=0;i<list_wor.size();i++){
-                temp+=("ID:"+values[i].ID+"name:"+values[i].name+"age:"+values[i].age+"salary:"+values[i].salary+"work:"+values[i].work+"\r\n");
+                temp+=("ID:"+values[i].ID+"\tname:"+values[i].name+"\tage:"+values[i].age+"\tsalary:"+values[i].salary+"\twork:"+values[i].work+"\r\n");
         }
         return temp;
     }
@@ -47,7 +47,7 @@ public class Worker{
         Wor[] values = (Wor[])list_wor.toArray(new Wor[0]);
         for(int i=0;i<list_wor.size();i++){
                 if(values[i].ID==a){
-                    return ("ID:"+values[i].ID+"name:"+values[i].name+"age:"+values[i].age+"score:"+values[i].salary+"work:"+values[i].work);
+                    return (values[i].ID+","+values[i].name+","+values[i].age+","+values[i].salary+","+values[i].work);
                 }
         }
         return "无该工人";

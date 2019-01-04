@@ -1,4 +1,4 @@
-package PIMS;
+package Control;
 
 import Model.File_fun;
 import Model.Student;
@@ -17,10 +17,26 @@ public class Control {
         worker.readList(file.read_file_wor());
         flash(gui, student);
 
+        gui.button_Stu.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gui.cardLayout.show(gui.p_card,"s");
+                flash(gui,student);
+            }
+        });
+
+        gui.button_Wor.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gui.cardLayout.show(gui.p_card,"w");
+                flash(gui,worker);
+            }
+        });
+
         gui.button_Add_s.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                student.add(Integer.parseInt(gui.t_ID_s.getText()),gui.t_name_s.getText(),Integer.parseInt(gui.t_age_s.getText()),Integer.parseInt(gui.t_age_s.getText()));
+                student.add(Integer.parseInt(gui.t_ID_s.getText()),gui.t_name_s.getText(),Integer.parseInt(gui.t_age_s.getText()),Integer.parseInt(gui.t_score.getText()));
                 autoSave(file, student, worker);
                 flash(gui,student);
             }
@@ -29,7 +45,7 @@ public class Control {
         gui.button_Add_w.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                worker.add(Integer.parseInt(gui.t_ID_w.getText()),gui.t_name_w.getText(),Integer.parseInt(gui.t_age_w.getText()),Integer.parseInt(gui.t_age_w.getText()),gui.t_work.getText());
+                worker.add(Integer.parseInt(gui.t_ID_w.getText()),gui.t_name_w.getText(),Integer.parseInt(gui.t_age_w.getText()),Integer.parseInt(gui.t_salary.getText()),gui.t_work.getText());
                 autoSave(file, student, worker);
                 flash(gui,worker);
             }
@@ -84,6 +100,34 @@ public class Control {
                 String temp=worker.delete(Integer.parseInt(gui.s_ID_w.getText()));
                 if(temp.equals("已删除")){
                     ;
+                }else if(temp.equals("无该工人")){
+                    ;
+                }
+                autoSave(file, student, worker);
+                flash(gui,worker);
+            }
+        });
+
+        gui.button_Modify_s.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String temp=student.delete(Integer.parseInt(gui.t_ID_s.getText()));
+                if(temp.equals("已删除")){
+                    student.add(Integer.parseInt(gui.t_ID_s.getText()),gui.t_name_s.getText(),Integer.parseInt(gui.t_age_s.getText()),Integer.parseInt(gui.t_score.getText()));
+                }else if(temp.equals("无该学生")){
+                    ;
+                }
+                autoSave(file, student, worker);
+                flash(gui,student);
+            }
+        });
+
+        gui.button_Modify_w.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String temp=worker.delete(Integer.parseInt(gui.t_ID_w.getText()));
+                if(temp.equals("已删除")){
+                    worker.add(Integer.parseInt(gui.t_ID_w.getText()),gui.t_name_w.getText(),Integer.parseInt(gui.t_age_w.getText()),Integer.parseInt(gui.t_salary.getText()),gui.t_work.getText());
                 }else if(temp.equals("无该工人")){
                     ;
                 }

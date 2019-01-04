@@ -27,7 +27,7 @@ public class Student{
         String temp="学生信息\r\n";
         Stu[] values = (Stu[])list_stu.toArray(new Stu[0]);
         for(int i=0;i<list_stu.size();i++){
-                temp+=("ID:"+values[i].ID+"name:"+values[i].name+"age:"+values[i].age+"score:"+values[i].score+"\r\n");
+                temp+=("ID:"+values[i].ID+"\tname:"+values[i].name+"\tage:"+values[i].age+"\tscore:"+values[i].score+"\r\n");
         }
         return temp;
     }
