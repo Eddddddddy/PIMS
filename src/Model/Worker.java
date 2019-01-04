@@ -29,7 +29,7 @@ public class Worker{
         String temp="工人信息\r\n";
         Wor[] values = (Wor[])list_wor.toArray(new Wor[0]);
         for(int i=0;i<list_wor.size();i++){
-                temp+=("ID:"+values[i].ID+"\tname:"+values[i].name+"\tage:"+values[i].age+"\tsalary:"+values[i].salary+"\twork:"+values[i].work+"\r\n");
+                temp+=("ID:"+values[i].ID+"\t\tname:"+values[i].name+"\t\tage:"+values[i].age+"\t\tsalary:"+values[i].salary+"\t\twork:"+values[i].work+"\r\n");
         }
         return temp;
     }
