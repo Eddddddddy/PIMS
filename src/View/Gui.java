@@ -97,10 +97,10 @@ public class Gui {
         p_Operation_w.add(new JLabel("    工种："));
         p_Operation_w.add(t_work);
 
-        p_Search_s.add(new JLabel("ID："));
+        p_Search_s.add(new JLabel("ID/name："));
         p_Search_s.add(s_ID_s);
         p_Search_s.add(button_Search_s);
-        p_Search_w.add(new JLabel("ID："));
+        p_Search_w.add(new JLabel("ID/name："));
         p_Search_w.add(s_ID_w);
         p_Search_w.add(button_Search_w);
 

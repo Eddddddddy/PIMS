@@ -74,19 +74,30 @@ public class Control {
         gui.button_Search_s.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (gui.s_ID_s.getText() != null && !gui.s_ID_s.getText().trim().equals("")) {
-                    String temp = student.search(Integer.parseInt(gui.s_ID_s.getText()));
-                    if (!temp.equals("无该学生")) {
-                        String[] strArray = convertStrToArray(temp);
+                try {
+                    if (gui.s_ID_s.getText() != null && !gui.s_ID_s.getText().trim().equals("")) {
+                        String temp = student.search(Integer.parseInt(gui.s_ID_s.getText()));
+                        if (!temp.equals("无该学生")) {
+                            String[] strArray = convertStrToArray(temp);
+                            gui.t_ID_s.setText(strArray[0]);
+                            gui.t_name_s.setText(strArray[1]);
+                            gui.t_age_s.setText(strArray[2]);
+                            gui.t_score.setText(strArray[3]);
+                        } else {
+                            gui.l.setText("未找到该生信息");
+                        }
+                    } else {
+                        gui.l.setText("请填入必要信息");
+                    }
+                }catch (Exception e2){
+                    String temp_n = student.search(gui.s_ID_s.getText());
+                    if(!temp_n.equals("无该学生")) {
+                        String[] strArray = convertStrToArray(temp_n);
                         gui.t_ID_s.setText(strArray[0]);
                         gui.t_name_s.setText(strArray[1]);
                         gui.t_age_s.setText(strArray[2]);
                         gui.t_score.setText(strArray[3]);
-                    } else {
-                        gui.l.setText("未找到该生信息");
                     }
-                } else {
-                    gui.l.setText("请填入必要信息");
                 }
             }
         });
@@ -94,20 +105,32 @@ public class Control {
         gui.button_Search_w.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (gui.s_ID_w.getText() != null && !gui.s_ID_w.getText().trim().equals("")) {
-                    String temp = worker.search(Integer.parseInt(gui.s_ID_w.getText()));
-                    if (!temp.equals("无该工人")) {
-                        String[] strArray = convertStrToArray(temp);
+                try {
+                    if (gui.s_ID_w.getText() != null && !gui.s_ID_w.getText().trim().equals("")) {
+                        String temp = worker.search(Integer.parseInt(gui.s_ID_w.getText()));
+                        if (!temp.equals("无该工人")) {
+                            String[] strArray = convertStrToArray(temp);
+                            gui.t_ID_w.setText(strArray[0]);
+                            gui.t_name_w.setText(strArray[1]);
+                            gui.t_age_w.setText(strArray[2]);
+                            gui.t_salary.setText(strArray[3]);
+                            gui.t_work.setText(strArray[3]);
+                        } else {
+                            gui.l.setText("未找到该人员信息");
+                        }
+                    } else {
+                        gui.l.setText("请填入必要信息");
+                    }
+                }catch (Exception e2){
+                    String temp_n = worker.search(gui.s_ID_w.getText());
+                    if(!temp_n.equals("无该工人")) {
+                        String[] strArray = convertStrToArray(temp_n);
                         gui.t_ID_w.setText(strArray[0]);
                         gui.t_name_w.setText(strArray[1]);
                         gui.t_age_w.setText(strArray[2]);
                         gui.t_salary.setText(strArray[3]);
-                        gui.t_work.setText(strArray[4]);
-                    } else {
-                        gui.l.setText("未找到该人员信息");
+                        gui.t_work.setText(strArray[3]);
                     }
-                } else {
-                    gui.l.setText("请填入必要信息");
                 }
             }
         });
