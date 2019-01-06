@@ -6,7 +6,7 @@ import java.awt.*;
 public class Gui {
     public CardLayout cardLayout = new CardLayout();
 
-    JFrame f = new JFrame("学生管理系统");
+    JFrame f = new JFrame("人员管理系统");
 
     public JPanel p_card = new JPanel(cardLayout);
     JPanel p_card_s = new JPanel();

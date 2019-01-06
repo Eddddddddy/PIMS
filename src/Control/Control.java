@@ -114,7 +114,7 @@ public class Control {
                             gui.t_name_w.setText(strArray[1]);
                             gui.t_age_w.setText(strArray[2]);
                             gui.t_salary.setText(strArray[3]);
-                            gui.t_work.setText(strArray[3]);
+                            gui.t_work.setText(strArray[4]);
                         } else {
                             gui.l.setText("未找到该人员信息");
                         }
@@ -129,7 +129,7 @@ public class Control {
                         gui.t_name_w.setText(strArray[1]);
                         gui.t_age_w.setText(strArray[2]);
                         gui.t_salary.setText(strArray[3]);
-                        gui.t_work.setText(strArray[3]);
+                        gui.t_work.setText(strArray[4]);
                     }
                 }
             }
