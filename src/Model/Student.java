@@ -1,5 +1,7 @@
 package Model;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Student{
@@ -17,6 +19,16 @@ public class Student{
             temp.ID=ID;
             temp.name=name;
             list_stu.add(temp);
+            String sql = "insert into Student values("+ID+",'"+name+"',"+age+","+score+");";
+            Statement statement=new SQL().getStatement();
+            statement.executeUpdate(sql);
+            String sql1 = "select ID,name, from Student where ID="+ID;
+            ResultSet rs = statement.executeQuery(sql);
+            while(rs.next())
+            {
+                int id = rs.getInt("ID");
+            }
+            statement.close();
             return "添加成功";
         }catch(Exception e){
             return "添加失败";
@@ -24,29 +36,69 @@ public class Student{
     }
 
     public String printAll(){
-        String temp="学生信息\r\n";
-        Stu[] values = (Stu[])list_stu.toArray(new Stu[0]);
-        for(int i=0;i<list_stu.size();i++){
-                temp+=("ID:"+values[i].ID+"\t\tname:"+values[i].name+"\t\tage:"+values[i].age+"\t\tscore:"+values[i].score+"\r\n");
+        try {
+            String temp = "学生信息\r\n";
+//            Stu[] values = (Stu[]) list_stu.toArray(new Stu[0]);
+
+            Statement statement = new SQL().getStatement();
+            String sql = "select ID,name, from Student";
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                temp += ("ID:" + rs.getString("ID") + "\t\tname:" + rs.getString("name") + "\t\tage:" + rs.getString("age") + "\t\tscore:" + rs.getString("score") + "\r\n");
+            }
+            statement.close();
+
+//            for (int i = 0; i < list_stu.size(); i++) {
+//                temp += ("ID:" + values[i].ID + "\t\tname:" + values[i].name + "\t\tage:" + values[i].age + "\t\tscore:" + values[i].score + "\r\n");
+//            }
+            return temp;
+        }catch (Exception e) {
+        ;
         }
-        return temp;
+        return "0";
     }
 
     public String showAll(){
-        String temp="学生信息\r\n";
-        Stu[] values = (Stu[])list_stu.toArray(new Stu[0]);
-        for(int i=0;i<list_stu.size();i++){
-            temp+=(values[i].ID+","+values[i].name+","+values[i].age+","+values[i].score+"\r\n");
+        try {
+            String temp = "学生信息\r\n";
+//            Stu[] values = (Stu[]) list_stu.toArray(new Stu[0]);
+
+            Statement statement = new SQL().getStatement();
+            String sql = "select ID,name, from Student";
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                temp += (rs.getString("ID") + "," + rs.getString("name") + "," + rs.getString("age") + "," + rs.getString("score") + "\r\n");
+            }
+            statement.close();
+
+//            for (int i = 0; i < list_stu.size(); i++) {
+//                temp += ("ID:" + values[i].ID + "\t\tname:" + values[i].name + "\t\tage:" + values[i].age + "\t\tscore:" + values[i].score + "\r\n");
+//            }
+            return temp;
+        }catch (Exception e) {
+            ;
         }
-        return temp;
+        return "0";
     }
 
+
     public String search(int a){
-        Stu[] values = (Stu[])list_stu.toArray(new Stu[0]);
-        for(int i=0;i<list_stu.size();i++){
-                if(values[i].ID==a){
-                    return (values[i].ID+","+values[i].name+","+values[i].age+","+values[i].score);
-                }
+        try {
+            Stu[] values = (Stu[]) list_stu.toArray(new Stu[0]);
+
+            Statement statement = new SQL().getStatement();
+            String sql = "select ID,name, from Student";
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                if(rs.getInt("ID")==a)
+                return (rs.getString("ID") + "," + rs.getString("name") + "," + rs.getString("age") + "," + rs.getString("score") + "\r\n");
+            }
+
+
+        }catch (Exception e){
+            ;
         }
         return "无该学生";
     }
