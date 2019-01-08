@@ -26,7 +26,7 @@ public class SQL {
 
                statement = con.createStatement();
 
-            con.close();
+            //con.close();
 
 
 
@@ -47,7 +47,6 @@ public class SQL {
 
     }
     public Statement getStatement(){
-
         return statement;
     }
 }

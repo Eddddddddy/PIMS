@@ -1,5 +1,7 @@
 package Model;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Worker{
@@ -19,6 +21,10 @@ public class Worker{
             temp.name=name;
             temp.work=work;
             list_wor.add(temp);
+            String sql = "insert into Worker values(" + ID + ",'" + name + "'," + age + "," + salary+","+work + ");";
+            Statement statement = new SQL().getStatement();
+            statement.executeUpdate(sql);
+            statement.close();
             return "添加成功";
         }catch(Exception e){
             return "添加失败";
@@ -26,74 +32,163 @@ public class Worker{
     }
 
     public String printAll(){
-        String temp="工人信息\r\n";
-        Wor[] values = (Wor[])list_wor.toArray(new Wor[0]);
-        for(int i=0;i<list_wor.size();i++){
-                temp+=("ID:"+values[i].ID+"\t\tname:"+values[i].name+"\t\tage:"+values[i].age+"\t\tsalary:"+values[i].salary+"\t\twork:"+values[i].work+"\r\n");
+        try {
+            String temp = "工人信息\r\n";
+            Statement statement = new SQL().getStatement();
+            String sql = "select ID,name,age,salary,work from Worker";
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                temp += ("ID:" + rs.getString("ID") + "\t\tname:" + rs.getString("name") + "\t\tage:" + rs.getString("age") + "\t\tsalary:" + rs.getString("salary") + "\t\twork:"+rs.getString("work")+"\r\n");
+            }
+            statement.close();
+            return temp;
+        }catch (Exception e){
+            ;
         }
-        return temp;
+        return "0";
     }
 
     public String showAll(){
-        String temp="工人信息\r\n";
-        Wor[] values = (Wor[])list_wor.toArray(new Wor[0]);
-        for(int i=0;i<list_wor.size();i++){
-            temp+=(values[i].ID+","+values[i].name+","+values[i].age+","+values[i].salary+","+values[i].work+"\r\n");
+        try {
+            String temp = "工人信息\r\n";
+            Statement statement = new SQL().getStatement();
+            String sql = "select ID,name,age,salary,work from Worker";
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                temp += (rs.getString("ID") + "," + rs.getString("name") + "," + rs.getString("age") + "," + rs.getString("salary") + ","+rs.getString("work")+"\r\n");
+            }
+            statement.close();
+            return temp;
+        }catch (Exception e){
+            ;
         }
-        return temp;
+        return "0";
     }
 
     public String search(int a){
-        Wor[] values = (Wor[])list_wor.toArray(new Wor[0]);
-        for(int i=0;i<list_wor.size();i++){
-                if(values[i].ID==a){
-                    return (values[i].ID+","+values[i].name+","+values[i].age+","+values[i].salary+","+values[i].work);
-                }
+        try {
+            Statement statement = new SQL().getStatement();
+            String sql = "select ID,name,age,salary,work from Worker";
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                if (rs.getInt("ID") == a)
+                    return (rs.getString("ID") + "," + rs.getString("name") + "," + rs.getString("age") + "," + rs.getString("salary") + ","+rs.getString("work"));
+            }
+        } catch (Exception e) {
+            ;
         }
         return "无该工人";
     }
 
     public String search(String a){
-        Wor[] values = (Wor[]) list_wor.toArray(new Wor[0]);
-        for(int i=0;i<list_wor.size();i++){
-            if(values[i].name.equals(a)){
-                return (values[i].ID+","+values[i].name+","+values[i].age+","+values[i].salary+","+values[i].work);
+        try {
+            Statement statement = new SQL().getStatement();
+            String sql = "select ID,name,age,salary,work from Worker";
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                if (rs.getString("name").equals(a)) {
+                    return (rs.getString("ID") + "," + rs.getString("name") + "," + rs.getString("age") + "," + rs.getString("salary") + ","+rs.getString("work"));
+                }
             }
-        }
-        int[] same=new int[100];
-        char[] toCharArray_a=a.toCharArray();
-        for(int i=0;i<list_wor.size();i++){
-            char[] toCharArray = values[i].name.toCharArray();
-            for(int j=0;j<toCharArray.length;j++){
-                for(int k=0;k<toCharArray_a.length;k++){
-                    if(toCharArray[j]==toCharArray_a[k]){
-                        same[i]++;
+
+            int[][] same = new int[2][100];
+            char[] toCharArray_a = a.toCharArray();
+            int i=-1;
+            rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                i++;
+                char[] toCharArray = rs.getString("name").toCharArray();
+                for (int j = 0; j < toCharArray.length; j++) {
+                    for (int k = 0; k < toCharArray_a.length; k++) {
+                        if (toCharArray[j] == toCharArray_a[k]) {
+                            same[0][i]++;
+                            same[1][i]=rs.getInt("ID");
+                        }
                     }
                 }
             }
-        }
-        int max=0,max_i=0;
-        for(int i=0;i<100;i++){
-            if(same[i]>max){
-                max=same[i];
-                max_i=i;
+            int max = 0, max_i = 0;
+            for (i = 0; i < 100; i++) {
+                if (same[0][i] > max) {
+                    max = same[0][i];
+                    max_i = i;
+                }
             }
-        }
-        if(max!=0){
-            return (values[max_i].ID+","+values[max_i].name+","+values[max_i].age+","+values[max_i].salary+","+values[max_i].work);
+            if (max != 0) {
+                sql = "select ID,name,age,salary,work from Worker where ID="+same[1][max_i]+";";
+                ResultSet rst = statement.executeQuery(sql);
+                rst.next();
+                return (rst.getString("ID") + "," + rst.getString("name") + "," + rst.getString("age") + "," + rst.getString("salary") + ","+rst.getString("work"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("wqe");
         }
         return "无该工人";
     }
 
     public String delete(int a){
-        Wor[] values = (Wor[])list_wor.toArray(new Wor[0]);
-        for(int i=0;i<list_wor.size();i++){
-
-                if(values[i].ID==a){
-                    list_wor.remove(i);
+        try {
+            Statement statement = new SQL().getStatement();
+            String sql = "select ID,name,age,salary,work from Worker";
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                if (rs.getInt("ID") == a) {
+                    sql = "delete from  worker where  ID = "+a+";";
+                    statement.executeUpdate(sql);
                     return "已删除";
                 }
+            }
 
+        }catch (Exception e){}
+        return "无该工人";
+    }
+
+    public String delete(String a) {
+        try {
+
+            Statement statement = new SQL().getStatement();
+            String sql = "select ID,name,age,salary,work from Worker";
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                if (rs.getString("name").equals(a)) {
+                    sql = "delete from  worker where name="+a+";";
+                    statement.executeUpdate(sql);
+                    return "已删除";
+                }
+            }
+
+            int[][] same = new int[2][100];
+            char[] toCharArray_a = a.toCharArray();
+            int i=-1;
+            rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                i++;
+                char[] toCharArray = rs.getString("name").toCharArray();
+                for (int j = 0; j < toCharArray.length; j++) {
+                    for (int k = 0; k < toCharArray_a.length; k++) {
+                        if (toCharArray[j] == toCharArray_a[k]) {
+                            same[0][i]++;
+                            same[1][i]=rs.getInt("ID");
+                        }
+                    }
+                }
+            }
+            int max = 0, max_i = 0;
+            for (i = 0; i < 100; i++) {
+                if (same[0][i] > max) {
+                    max = same[0][i];
+                    max_i = i;
+                }
+            }
+            if (max != 0) {
+                sql = "delete from  worker where ID="+same[1][max_i]+";";
+                statement.executeUpdate(sql);
+                return "已删除";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("wqe");
         }
         return "无该工人";
     }
