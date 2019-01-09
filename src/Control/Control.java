@@ -1,8 +1,7 @@
 package Control;
 
-import Model.File_fun;
-import Model.Student;
-import Model.Worker;
+import Model.Student_SQL;
+import Model.Worker_SQL;
 import View.Gui;
 
 import java.awt.event.ActionEvent;
@@ -10,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class Control {
 
-    public Control(Gui gui, Student student, Worker worker) {
+    public Control(Gui gui, Student_SQL student, Worker_SQL worker) {
         flash(gui, student);
 
         gui.button_Stu.addActionListener(new ActionListener() {
@@ -233,11 +232,11 @@ public class Control {
     }
 
 
-    public void flash(Gui gui, Student student) {
+    public void flash(Gui gui, Student_SQL student) {
         gui.t.setText(student.printAll());
     }
 
-    public void flash(Gui gui, Worker worker) {
+    public void flash(Gui gui, Worker_SQL worker) {
         gui.t.setText(worker.printAll());
     }
 

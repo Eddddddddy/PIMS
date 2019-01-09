@@ -4,13 +4,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Student {
+public class Student_SQL {
     ArrayList list_stu = new ArrayList();
-
-    public class Stu extends Person {
-        int score;
-    }
-
     public String add(int ID, String name, int age, int score) {
         try {
             Stu temp = new Stu();
@@ -24,6 +19,7 @@ public class Student {
             statement.executeUpdate(sql);
             statement.close();
             return "添加成功";
+
         } catch (Exception e) {
             return "添加失败";
         }
@@ -62,8 +58,6 @@ public class Student {
         }
         return "0";
     }
-
-
     public String search(int a) {
         try {
             Statement statement = new SQL().getStatement();
@@ -92,7 +86,7 @@ public class Student {
 
             int[][] same = new int[2][100];
             char[] toCharArray_a = a.toCharArray();
-            int i=-1;
+            int i = -1;
             rs = statement.executeQuery(sql);
             while (rs.next()) {
                 i++;
@@ -101,7 +95,7 @@ public class Student {
                     for (int k = 0; k < toCharArray_a.length; k++) {
                         if (toCharArray[j] == toCharArray_a[k]) {
                             same[0][i]++;
-                            same[1][i]=rs.getInt("ID");
+                            same[1][i] = rs.getInt("ID");
                         }
                     }
                 }
@@ -114,7 +108,7 @@ public class Student {
                 }
             }
             if (max != 0) {
-                sql = "select ID,name,age,score from Student where ID="+same[1][max_i]+";";
+                sql = "select ID,name,age,score from Student where ID=" + same[1][max_i] + ";";
                 ResultSet rst = statement.executeQuery(sql);
                 rst.next();
                 return rst.getInt("ID") + "," + rst.getString("name") + "," + rst.getInt("age") + "," + rst.getInt("score");
@@ -128,20 +122,18 @@ public class Student {
 
     public String delete(int a) {
         try {
-            Stu[] values = (Stu[]) list_stu.toArray(new Stu[0]);
-
             Statement statement = new SQL().getStatement();
             String sql = "select ID,name,age,score from Student";
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 if (rs.getInt("ID") == a) {
-                    sql = "delete from  student where  ID = "+a+";";
+                    sql = "delete from  student where  ID = " + a + ";";
                     statement.executeUpdate(sql);
                     return "已删除";
                 }
             }
-
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
         return "无该学生";
     }
 
@@ -153,7 +145,7 @@ public class Student {
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 if (rs.getString("name").equals(a)) {
-                    sql = "delete from  student where name="+a+";";
+                    sql = "delete from  student where name=" + a + ";";
                     statement.executeUpdate(sql);
                     return "已删除";
                 }
@@ -161,8 +153,7 @@ public class Student {
 
             int[][] same = new int[2][100];
             char[] toCharArray_a = a.toCharArray();
-            //for (int i = 0; i < list_stu.size(); i++) {
-            int i=-1;
+            int i = -1;
             rs = statement.executeQuery(sql);
             while (rs.next()) {
                 i++;
@@ -171,7 +162,7 @@ public class Student {
                     for (int k = 0; k < toCharArray_a.length; k++) {
                         if (toCharArray[j] == toCharArray_a[k]) {
                             same[0][i]++;
-                            same[1][i]=rs.getInt("ID");
+                            same[1][i] = rs.getInt("ID");
                         }
                     }
                 }
@@ -184,7 +175,7 @@ public class Student {
                 }
             }
             if (max != 0) {
-                sql = "delete from  student where ID="+same[1][max_i]+";";
+                sql = "delete from  student where ID=" + same[1][max_i] + ";";
                 statement.executeUpdate(sql);
                 return "已删除";
             }
@@ -202,4 +193,6 @@ public class Student {
     public void readList(ArrayList temp) {
         list_stu = temp;
     }
+
+
 }

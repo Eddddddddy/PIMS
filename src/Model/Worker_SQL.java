@@ -4,13 +4,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Worker{
+public class Worker_SQL {
     ArrayList list_wor=new ArrayList();
 
-    public class Wor extends Person{
-        int salary;
-        String work;
-    }
+
 
     public String add(int ID, String name, int age, int salary, String work){
         try {
@@ -21,7 +18,7 @@ public class Worker{
             temp.name=name;
             temp.work=work;
             list_wor.add(temp);
-            String sql = "insert into Worker values(" + ID + ",'" + name + "'," + age + "," + salary+","+work + ");";
+            String sql = "insert into Worker values(" + ID + ",'" + name + "'," + age + "," + salary+",'"+work + "');";
             Statement statement = new SQL().getStatement();
             statement.executeUpdate(sql);
             statement.close();

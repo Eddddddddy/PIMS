@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class File_fun {
     String[] strArray = null;
-    Student tempStu=new Student();
-    Worker tempWor=new Worker();
+    Student_SQL tempStu=new Student_SQL();
+    Worker_SQL tempWor=new Worker_SQL();
     public ArrayList read_file_stu() {
-        Student tempStu=new Student();
+        Student_SQL tempStu=new Student_SQL();
         File file = new File("data_stu.txt");
         BufferedReader reader = null;
         try {
@@ -39,7 +39,7 @@ public class File_fun {
     }
 
     public ArrayList read_file_wor() {
-        Worker tempWor=new Worker();
+        Worker_SQL tempWor=new Worker_SQL();
         File file = new File("data_wor.txt");
         BufferedReader reader = null;
         try {
@@ -69,7 +69,7 @@ public class File_fun {
         return tempWor.list_wor;
     }
 
-    public void write_file(Student s,Worker w) {
+    public void write_file(Student_SQL s, Worker_SQL w) {
         File file_stu = new File("data_stu.txt");
         File file_wor = new File("data_wor.txt");
         BufferedWriter writer_stu = null;
